@@ -2,7 +2,7 @@
   <div
     id="nav"
     class="
-      absolute
+      fixed
       top-0
       left-0
       h-screen
@@ -12,18 +12,20 @@
       bg-black
       justify-between
       items-center
-      rounded-tl
-      border-gray-800 border-r-2
       font-extrabold
-      text-gray-800
+      text-gray-600
     "
   >
     <div class="pt-5">
       <span class="bg-white h-5 w-5">Logo</span>
     </div>
     <div class="flex flex-col space-y-6">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link to="/" class="flex justify-center align-center"
+        ><i class="fas fa-home" aria-hidden="true"></i
+      ></router-link>
+      <router-link to="/about" class="flex justify-center align-center"
+        ><i class="fas fa-stream" aria-hidden="true"></i
+      ></router-link>
     </div>
     <div class="pb-9">
       <h2>kek</h2>
@@ -40,12 +42,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  margin-left: 100px;
 }
 
 #nav {
   a {
+    font-size: 20px;
+    padding: 8px 10px;
     &.router-link-exact-active {
-      color: #42b983;
+      color: white;
+      background: #166088;
+      border-radius: 10px;
     }
   }
 }

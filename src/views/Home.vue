@@ -10,42 +10,26 @@
       <span class="mt-8 -ml-10">videos</span>
     </h1>
     <div class="grid grid-cols-3 ml-36">
-      <div class="mt-48">
-        <iframe
-          src="https://www.youtube.com/embed/zvbp-oXIys4"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-
-      <div class="mt-6">
-        <iframe
-          src="https://www.youtube.com/embed/zvbp-oXIys4"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-
-      <div class="mt-24">
-        <iframe
-          src="https://www.youtube.com/embed/zvbp-oXIys4"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <youtube-card
+        v-for="index in 3"
+        :key="index"
+        :top-margin="videoCardMargin[index - 1]"
+      />
     </div>
   </section>
 </template>
 
 <script>
+import YoutubeCard from '../components/YoutubeCard.vue'
+
 export default {
+  components: { YoutubeCard },
   name: 'Home',
+  data() {
+    return {
+      videoCardMargin: ['48', '6', '24'],
+    }
+  },
 }
 </script>
 
@@ -65,11 +49,5 @@ export default {
     width: 100%;
     height: 100%;
   }
-}
-
-iframe {
-  height: 315px;
-  width: 500px;
-  border-radius: 25px;
 }
 </style>

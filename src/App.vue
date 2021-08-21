@@ -6,7 +6,7 @@
       top-0
       left-0
       h-screen
-      w-28
+      w-36
       z-50
       flex flex-col
       bg-black
@@ -16,8 +16,8 @@
       text-gray-600
     "
   >
-    <div class="pt-5">
-      <span class="bg-white h-5 w-5">Logo</span>
+    <div class="pt-6 pl-6 pr-6">
+      <img src="./assets/images/home-images/logo.png" />
     </div>
     <div class="flex flex-col space-y-6">
       <router-link to="/" class="flex justify-center align-center"

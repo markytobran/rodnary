@@ -4,13 +4,10 @@ import * as VideoService from '../video.service'
 import { video } from './mock/video'
 
 describe("GET '/api/video/:id' route", async () => {
-  //Create server
   const server = await createServer()
   await server.ready()
 
-  //Mock get video by id service
   const getVideoByIDSpy = vi.spyOn(VideoService, 'getVideoByID')
-  expect(getVideoByIDSpy.getMockName()).toEqual('getVideoByID')
 
   it('calling the getVideoByID service with valid _id returns the right video', async () => {
     const id = '6224aa48ff039311145329b7'

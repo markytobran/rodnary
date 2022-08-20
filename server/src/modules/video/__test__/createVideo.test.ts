@@ -5,13 +5,10 @@ import { video } from './mock/video'
 import { config } from '../../../utils/config'
 
 describe("POST '/api/video' route", async () => {
-  //Create server
   const server = await createServer()
   await server.ready()
 
-  //Mock create video service
   const createVideoSpy = vi.spyOn(VideoService, 'createVideo')
-  expect(createVideoSpy.getMockName()).toEqual('createVideo')
   createVideoSpy.mockResolvedValue(video)
 
   it('calling the createVideo service with the VALID API key and VALID body should return the video', async () => {

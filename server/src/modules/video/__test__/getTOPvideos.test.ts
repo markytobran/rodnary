@@ -3,21 +3,22 @@ import { createServer } from '../../../utils/createServer'
 import * as VideoService from '../video.service'
 import { video } from './mock/video'
 
-describe("GET '/api/video' route", async () => {
+describe("GET '/api/video/topvideos/home' route", async () => {
   const server = await createServer()
   await server.ready()
 
   const getVideosSpy = vi.spyOn(VideoService, 'getVideos')
 
-  it('calling the getVideo service return all videos', async () => {
-    const videos = [video, video, video]
-    getVideosSpy.mockResolvedValue(videos)
+  it('calling the getVideo service return the right videos for the home page', async () => {
+    getVideosSpy.mockResolvedValueOnce([video, video])
+    getVideosSpy.mockResolvedValueOnce([video, video])
+
     const response = await server.inject({
       method: 'GET',
-      url: '/api/video',
+      url: '/api/video/topvideos/home',
     })
 
-    expect(response.json()).toEqual(videos)
+    expect(response.json()).toEqual({ commercialVideos: [video, video], naturalVideos: [video, video] })
     expect(response.statusCode).toEqual(200)
   })
 
@@ -25,10 +26,10 @@ describe("GET '/api/video' route", async () => {
     getVideosSpy.mockRejectedValue('Oh no error')
     const response = await server.inject({
       method: 'GET',
-      url: '/api/video',
+      url: '/api/video/topvideos/home',
     })
 
-    expect(response.json()).toEqual({ message: 'Error getting videos' })
+    expect(response.json()).toEqual({ message: 'Error getting TOP Videos for homepage' })
     expect(response.statusCode).toEqual(500)
   })
 })

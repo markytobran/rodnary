@@ -9,9 +9,9 @@ describe("GET '/api/video' route", async () => {
   await server.ready()
 
   //Mock create video service
-  const createVideoSpy = vi.spyOn(VideoService, 'createVideo')
-  expect(createVideoSpy.getMockName()).toEqual('createVideo')
-  createVideoSpy.mockResolvedValue(video)
+  const getVideosSpy = vi.spyOn(VideoService, 'getVideos')
+  expect(getVideosSpy.getMockName()).toEqual('getVideos')
+  getVideosSpy.mockResolvedValue(video)
 
   it('calling the createVideo service with the VALID API key and VALID body should return the video', async () => {
     const response = await server.inject({
@@ -20,8 +20,8 @@ describe("GET '/api/video' route", async () => {
       payload: video,
     })
 
-    expect(createVideoSpy).toHaveBeenCalledWith(video)
+    expect(getVideosSpy).toHaveBeenCalledWith(video)
     expect(response.json()).toEqual(video)
-    expect(response.statusCode).toEqual(201)
+    expect(response.statusCode).toEqual(200)
   })
 })

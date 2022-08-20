@@ -11,16 +11,27 @@ describe("GET '/api/video' route", async () => {
   //Mock create video service
   const getVideosSpy = vi.spyOn(VideoService, 'getVideos')
   expect(getVideosSpy.getMockName()).toEqual('getVideos')
-  getVideosSpy.mockResolvedValue(video)
 
-  it('calling the getVideo service return the video', async () => {
+  it('calling the getVideo service return the all videos', async () => {
+    const videos = [video, video, video]
+    getVideosSpy.mockResolvedValue(videos)
     const response = await server.inject({
       method: 'GET',
       url: '/api/video',
     })
 
-    expect(getVideosSpy).toHaveBeenCalledWith(video)
-    expect(response.json()).toEqual(video)
+    expect(response.json()).toEqual(videos)
     expect(response.statusCode).toEqual(200)
+  })
+
+  it('calling the getVideo service, but error occurs', async () => {
+    getVideosSpy.mockRejectedValue('Oh no :(')
+    const response = await server.inject({
+      method: 'GET',
+      url: '/api/video',
+    })
+
+    expect(response.json()).toEqual({ message: 'Error getting videos' })
+    expect(response.statusCode).toEqual(500)
   })
 })

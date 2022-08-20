@@ -21,7 +21,7 @@ export async function getVideoHandler(req: FastifyRequest<{ Params: GetVideoPara
     const id = req.params.id
     const isValid = mongoose.isValidObjectId(id)
 
-    if (!isValid || !id) {
+    if (!isValid) {
       return reply.code(400).send({ message: 'Error video id is not valid' })
     }
 
@@ -43,8 +43,8 @@ export async function createVideoHandler(req: FastifyRequest<{ Body: CreateVideo
     const video = await createVideo(req.body)
     return reply.code(201).send(video)
   } catch (e) {
-    logger.error(e, 'createTodoHandler: error creating todo')
-    return reply.code(400).send({ message: 'Error creating todo' })
+    logger.error(e, 'createTodoHandler: error creating new video')
+    return reply.code(500).send({ message: 'Error creating new video' })
   }
 }
 

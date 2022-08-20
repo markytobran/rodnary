@@ -13,11 +13,10 @@ describe("GET '/api/video' route", async () => {
   expect(getVideosSpy.getMockName()).toEqual('getVideos')
   getVideosSpy.mockResolvedValue(video)
 
-  it('calling the createVideo service with the VALID API key and VALID body should return the video', async () => {
+  it('calling the getVideo service return the video', async () => {
     const response = await server.inject({
       method: 'GET',
       url: '/api/video',
-      payload: video,
     })
 
     expect(getVideosSpy).toHaveBeenCalledWith(video)

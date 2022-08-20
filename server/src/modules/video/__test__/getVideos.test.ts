@@ -8,11 +8,11 @@ describe("GET '/api/video' route", async () => {
   const server = await createServer()
   await server.ready()
 
-  //Mock create video service
+  //Mock get videos service
   const getVideosSpy = vi.spyOn(VideoService, 'getVideos')
   expect(getVideosSpy.getMockName()).toEqual('getVideos')
 
-  it('calling the getVideo service return the all videos', async () => {
+  it('calling the getVideo service return all videos', async () => {
     const videos = [video, video, video]
     getVideosSpy.mockResolvedValue(videos)
     const response = await server.inject({
@@ -25,7 +25,7 @@ describe("GET '/api/video' route", async () => {
   })
 
   it('calling the getVideo service, but error occurs', async () => {
-    getVideosSpy.mockRejectedValue('Oh no :(')
+    getVideosSpy.mockRejectedValue('Oh no error')
     const response = await server.inject({
       method: 'GET',
       url: '/api/video',
